@@ -1,75 +1,75 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <title>ムビチョコ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Kosugi+Maru&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="utf-8">
+<title>ムビチョコ</title>
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Kosugi+Maru&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>🎬ムビチョコ🍫</h1>
+<h1>🎬ムビチョコ🍫</h1>
 
-  <div class="tabs">
-    <div class="tab active" data-tab="want">観たいリスト</div>
-    <div class="tab" data-tab="watched">観たリスト</div>
-    <div class="tab" data-tab="add">追加</div>
-    <div class="tab" data-tab="settings">設定</div>
+<div class="tabs">
+  <div class="tab active" data-tab="want">観たいリスト</div>
+  <div class="tab" data-tab="watched">観たリスト</div>
+  <div class="tab" data-tab="add">追加</div>
+  <div class="tab" data-tab="settings">設定</div>
+</div>
+
+<div id="want" class="tabContent active">
+  <br>
+  <h2>🍿観たいリスト</h2>
+  <div class="random-box">
+    <h3>🎲 ランダムピックアップ</h3>
+    <label>ステータス:
+      <select id="filterStatus">
+        <option value="">全部</option>
+        <option value="無料">無料</option>
+        <option value="有料">有料</option>
+      </select>
+    </label>
+    <label>ジャンル:
+      <select id="filterGenre"><option value="">全部</option></select>
+    </label>
+    <br>
+    <button id="btnRandom">ランダムで選ぶ</button>
+    <div id="randomResult" style="margin-top:12px;"></div>
   </div>
 
-  <div id="want" class="tabContent active">
-    <h2>🍿観たいリスト</h2>
-    <div class="random-box">
-      <h3>🎲 ランダムピックアップ</h3>
-      <label>ステータス:
-        <select id="filterStatus">
-          <option value="">全部</option>
-          <option value="無料">無料</option>
-          <option value="有料">有料</option>
-        </select>
-      </label>
-      <label>ジャンル:
-        <select id="filterGenre"><option value="">全部</option></select>
-      </label>
-      <button id="btnRandom">ランダムで選ぶ</button>
-      <div id="randomResult"></div>
-    </div>
-    <div id="wantList">読み込み中...</div>
-  </div>
+  <div id="wantList">読み込み中...</div>
+</div>
 
-  <div id="watched" class="tabContent">
-    <h2>✅観たリスト</h2>
-    <div id="watchedList" class="cards-container">読み込み中...</div>
-  </div>
+<div id="watched" class="tabContent">
+  <br>
+  <h2>✅観たリスト</h2>
+  <div id="watchedList" class="cards-container">読み込み中...</div>
+</div>
 
-  <div id="add" class="tabContent">
-    <h2>➕追加</h2>
-    <form id="addForm">
-      <label>タイトル</label>
-      <input type="text" id="title" required>
-      <label>URL</label>
-      <input type="text" id="url">
-      <label>ステータス</label>
-      <input type="text" id="status" placeholder="有料/無料など">
-      <label>ジャンル</label>
-      <input type="text" id="genre">
-      <button type="submit">追加</button>
-    </form>
-    <div id="addMsg" class="status"></div>
-  </div>
+<div id="add" class="tabContent">
+  <br>
+  <h2>➕追加</h2>
+  <form id="addForm">
+    <label>タイトル</label>
+    <input type="text" id="title" required />
+    <label>URL</label>
+    <input type="text" id="url" />
+    <label>ステータス</label>
+    <input type="text" id="status" placeholder="有料/無料など" />
+    <label>ジャンル</label>
+    <input type="text" id="genre" />
+    <button type="submit">追加</button>
+  </form>
+  <div id="addMsg" class="status"></div>
+</div>
 
-  <div id="settings" class="tabContent">
-    <h2>⚙設定</h2>
-    <label>API URL: <input type="text" id="apiUrlInput" style="width:80%"></label>
-    <button id="saveApi">保存</button>
-    <div id="saveMsg" class="status"></div>
-  </div>
+<div id="settings" class="tabContent">
+  <br>
+  <h2>⚙設定</h2>
+  <label>API URL: <input type="text" id="apiUrlInput" style="width:80%" /></label>
+  <button id="saveApi">保存</button>
+  <div id="saveMsg" class="status"></div>
+</div>
 
-  <!-- JSの読み込み順が重要 -->
-  <script src="js/api.js"></script>
-  <script src="js/wantList.js"></script>
-  <script src="js/watchedList.js"></script>
-  <script src="js/random.js"></script>
-  <script src="js/addMovie.js"></script>
-  <script src="js/main.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
