@@ -40,6 +40,10 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  justify-content: center; /* ← 中央揃え */
+  align-items: flex-start;  /* ← 縦のズレ防止 */
+  margin: 0 auto;
+  max-width: 100%;
 }
 .movie {
   display: flex;
