@@ -5,5 +5,159 @@ body {
   background: #ffffff;
   color: #333;
 }
-/* ...中略（すべてのCSSをここに移動）... */
 
+h1 {
+  background: linear-gradient(90deg, #4da0ff, #1e90ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2em;
+  margin-bottom: 18px;
+}
+
+/* タブ */
+.tabs {
+  display: flex;
+  border-bottom: 2px solid #ccc;
+  margin-bottom: 12px;
+}
+.tab {
+  padding: 10px 16px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  background: #f0f8ff;
+  margin-right: 4px;
+  border-radius: 6px 6px 0 0;
+  transition: 0.3s;
+}
+.tab.active { background: #fff; font-weight: bold; color: #1e90ff; }
+.tab:hover { background: #e6f0ff; }
+.tabContent { display: none; }
+.tabContent.active { display: block; }
+
+/* カード共通 */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.movie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  padding: 12px;
+  width: 140px;
+}
+.movie img {
+  width: 130px;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  object-fit: cover;
+}
+.movie .no-image {
+  width: 130px;
+  height: 195px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eee;
+  color: #888;
+  font-size: 0.9em;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.movie a {
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  text-align: center;
+  margin-bottom: 6px;
+  display: block;
+  word-break: break-word;
+}
+.movie .status-label {
+  font-size: 0.85em;
+  color: #555;
+  margin-bottom: 6px;
+  text-align: center;
+}
+.movie button {
+  cursor: pointer;
+  background:#1e90ff;
+  border:none;
+  color:white;
+  padding:6px 12px;
+  border-radius:6px;
+  font-weight:bold;
+  transition: all 0.2s ease;
+}
+.movie button:hover { background:#187bcd; }
+
+/* ランダムピックアップ */
+.random-box {
+  background: linear-gradient(135deg, #d6f0ff, #e0f5ff);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 36px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.random-box h3 {
+  font-size: 1.4em;
+  color: #1e90ff;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#btnRandom {
+  background: white;
+  border: 2px solid #1e90ff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top:8px;
+}
+#btnRandom:hover {
+  background: linear-gradient(90deg, #4da0ff, #1e90ff);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* 追加フォーム */
+#addForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+#addForm label { font-weight: bold; }
+#addForm input {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #e6f2ff;
+}
+#addForm button {
+  margin-top: 12px;
+  padding: 8px;
+  border: none;
+  background: #1e90ff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#addForm button:hover { background: #187bcd; }
+
+/* ジャンルブロック */
+.genre-block {
+  margin-bottom: 24px;
+  padding: 12px;
+  border-radius: 12px;
+}
