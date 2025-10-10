@@ -1,1 +1,9 @@
+body {
+  font-family: 'Kosugi Maru', sans-serif;
+  margin: 18px;
+  max-width: 1000px;
+  background: #ffffff;
+  color: #333;
+}
+/* ...中略（すべてのCSSをここに移動）... */
 
