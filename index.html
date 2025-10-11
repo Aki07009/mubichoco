@@ -2,14 +2,13 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>🎬ムビチョコ🍫</title>
+<title>ムビチョコ</title>
 <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Kosugi+Maru&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <h1>🎬ムビチョコ🍫</h1>
 
-<!-- タブ -->
 <div class="tabs">
   <div class="tab active" data-tab="want">観たいリスト</div>
   <div class="tab" data-tab="watched">観たリスト</div>
@@ -17,7 +16,6 @@
   <div class="tab" data-tab="settings">設定</div>
 </div>
 
-<!-- 観たいリスト -->
 <div id="want" class="tabContent active">
   <br>
   <h2>🍿観たいリスト</h2>
@@ -38,18 +36,15 @@
     <div id="randomResult" style="margin-top:12px;"></div>
   </div>
 
-  <!-- 映画カードがここに入る -->
-  <div id="wantList" class="cards-container">読み込み中...</div>
+  <div id="wantList">読み込み中...</div>
 </div>
 
-<!-- 観たリスト -->
 <div id="watched" class="tabContent">
   <br>
   <h2>✅観たリスト</h2>
   <div id="watchedList" class="cards-container">読み込み中...</div>
 </div>
 
-<!-- 追加フォーム -->
 <div id="add" class="tabContent">
   <br>
   <h2>➕追加</h2>
@@ -67,7 +62,6 @@
   <div id="addMsg" class="status"></div>
 </div>
 
-<!-- 設定 -->
 <div id="settings" class="tabContent">
   <br>
   <h2>⚙設定</h2>
@@ -76,7 +70,7 @@
   <div id="saveMsg" class="status"></div>
 </div>
 
-<!-- JSリンク -->
 <script src="js/script.js"></script>
 </body>
 </html>
+
