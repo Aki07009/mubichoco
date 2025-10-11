@@ -42,13 +42,17 @@ async function loadWant(){
     grouped[g].forEach(m=>{
       const d=document.createElement('div');
       d.className='movie';
-      d.innerHTML=`
-        ${m.poster ? `<img src="${m.poster}" alt="${m.title}" onerror="this.style.display='none'"><div class="no-image" style="display:none">No image</div>` 
+
+      const paidLabel = m.status==='有料' ? '<div class="paid-label">💰</div>' : '';
+
+      d.innerHTML = `
+        ${paidLabel}
+        ${m.poster ? `<img src="${m.poster}" alt="${m.title}"><div class="no-image" style="display:none">No image</div>` 
                     : `<div class="no-image">No image</div>`}
-        <a href="${m.url||'#'}" target="_blank">${m.title}</a>
-        <div class="status-label">${m.status||''}</div>
+        <div class="title-hover">${m.title}</div>
         <button>観た！</button>
       `;
+
       const img = d.querySelector('img');
       const noImg = d.querySelector('.no-image');
       if(img) img.onerror = ()=>{ img.style.display='none'; noImg.style.display='flex'; };
@@ -57,6 +61,7 @@ async function loadWant(){
         await getJSON(API+`?action=watched&title=${encodeURIComponent(m.title)}`);
         loadWant(); loadWatched();
       };
+
       cardsContainer.appendChild(d);
     });
 
@@ -77,13 +82,17 @@ async function loadWatched(){
   data.forEach(m => {
     const d = document.createElement('div');
     d.className = 'movie';
+
+    const paidLabel = m.status==='有料' ? '<div class="paid-label">💰</div>' : '';
+
     d.innerHTML = `
-      ${m.poster ? `<img src="${m.poster}" alt="${m.title}" onerror="this.style.display='none'"><div class="no-image" style="display:none">No image</div>` 
+      ${paidLabel}
+      ${m.poster ? `<img src="${m.poster}" alt="${m.title}"><div class="no-image" style="display:none">No image</div>` 
                   : `<div class="no-image">No image</div>`}
-      <a href="${m.url||'#'}" target="_blank">${m.title}</a>
-      <div class="status-label">${m.status||''}</div>
+      <div class="title-hover">${m.title}</div>
       <div class="status-label">観た日: ${m.watchedDate ? new Date(m.watchedDate).toLocaleDateString() : ''}</div>
     `;
+
     const img = d.querySelector('img');
     const noImg = d.querySelector('.no-image');
     if(img) img.onerror = ()=>{ img.style.display='none'; noImg.style.display='flex'; };
