@@ -2,23 +2,30 @@ let API = localStorage.getItem('mubichoco_api') || '';
 let allMovies = [];
 
 // ステータス表示
-function setStatus(msg){ document.getElementById('addMsg').innerText = msg; }
-async function getJSON(url){ try { return await (await fetch(url)).json(); } catch(e){ console.error(e); return null; } }
+function setStatus(msg){ 
+  document.getElementById('addMsg').innerText = msg; 
+}
+async function getJSON(url){ 
+  try { 
+    return await (await fetch(url)).json(); 
+  } catch(e){ 
+    console.error(e); 
+    return null; 
+  } 
+}
 
-// 観たいリスト
+// ====== 観たいリスト読み込み ======
 async function loadWant(){
   if(!API){ document.getElementById('wantList').innerText="API未設定"; return; }
   const data = await getJSON(API+'?action=list');
   if(!data){ document.getElementById('wantList').innerText="読み込み失敗"; return; }
   allMovies = data;
 
-  // ジャンル選択更新
   const genreSelect = document.getElementById('filterGenre');
   const genres = Array.from(new Set(data.map(m=>m.genre||"未分類")));
   genreSelect.innerHTML = '<option value="">全部</option>';
   genres.forEach(g=>{ genreSelect.innerHTML += `<option value="${g}">${g}</option>`; });
 
-  // ジャンルごとにグループ化
   const grouped = {};
   data.forEach(m => {
     const g = m.genre || "未分類";
@@ -42,8 +49,8 @@ async function loadWant(){
     cardsContainer.className='cards-container';
 
     grouped[g].forEach(m=>{
-      const d = document.createElement('div');
-      d.className = 'movie';
+      const d=document.createElement('div');
+      d.className='movie';
 
       const paidLabel = m.status==='有料' ? '<div class="paid-label">💰</div>' : '';
 
@@ -51,18 +58,18 @@ async function loadWant(){
         ${paidLabel}
         ${m.poster ? `<img src="${m.poster}" alt="${m.title}"><div class="no-image" style="display:none">No image</div>` 
                     : `<div class="no-image">No image</div>`}
-        <h3>${m.title}</h3>
-        <div class="watched">観た</div>
+        <div class="title-hover">${m.title}</div>
+        <button class="watched">観た！</button>
       `;
 
       const img = d.querySelector('img');
       const noImg = d.querySelector('.no-image');
       if(img) img.onerror = ()=>{ img.style.display='none'; noImg.style.display='flex'; };
 
-      // 「観た」ボタンクリック
-      d.querySelector('.watched').onclick = async ()=>{
+      d.querySelector('button.watched').onclick = async ()=>{
         await getJSON(API+`?action=watched&title=${encodeURIComponent(m.title)}`);
-        loadWant(); loadWatched();
+        loadWant(); 
+        loadWatched();
       };
 
       cardsContainer.appendChild(d);
@@ -73,7 +80,7 @@ async function loadWant(){
   });
 }
 
-// 観たリスト
+// ====== 観たリスト読み込み ======
 async function loadWatched(){
   if(!API){ document.getElementById('watchedList').innerText="API未設定"; return; }
   const data = await getJSON(API+'?action=watchedList');
@@ -83,8 +90,8 @@ async function loadWatched(){
   container.innerHTML = '';
 
   data.forEach(m=>{
-    const d = document.createElement('div');
-    d.className = 'movie';
+    const d=document.createElement('div');
+    d.className='movie';
 
     const paidLabel = m.status==='有料' ? '<div class="paid-label">💰</div>' : '';
 
@@ -92,8 +99,8 @@ async function loadWatched(){
       ${paidLabel}
       ${m.poster ? `<img src="${m.poster}" alt="${m.title}"><div class="no-image" style="display:none">No image</div>` 
                   : `<div class="no-image">No image</div>`}
-      <h3>${m.title}</h3>
-      <div class="watched">観た</div>
+      <div class="title-hover">${m.title}</div>
+      <div class="status-label">観た日: ${m.watchedDate ? new Date(m.watchedDate).toLocaleDateString() : ''}</div>
     `;
 
     const img = d.querySelector('img');
@@ -104,8 +111,8 @@ async function loadWatched(){
   });
 }
 
-// ランダムピックアップ
-document.getElementById('btnRandom').onclick = () => {
+// ====== ランダムピックアップ ======
+document.getElementById('btnRandom').onclick = ()=>{
   if(!allMovies.length){ document.getElementById('randomResult').innerText="リストが空です"; return; }
   const statusFilter = document.getElementById('filterStatus').value;
   const genreFilter = document.getElementById('filterGenre').value;
@@ -117,8 +124,8 @@ document.getElementById('btnRandom').onclick = () => {
   document.getElementById('randomResult').innerHTML = `👉 <a href="${choice.url||'#'}" target="_blank">${choice.title}</a> [${choice.status||''}]`;
 };
 
-// 追加フォーム
-document.getElementById('addForm').onsubmit=async(e)=>{
+// ====== 追加フォーム ======
+document.getElementById('addForm').onsubmit = async(e)=>{
   e.preventDefault();
   if(!API){ setStatus("API未設定"); return; }
   const title=document.getElementById('title').value;
@@ -131,20 +138,21 @@ document.getElementById('addForm').onsubmit=async(e)=>{
   loadWant();
 };
 
-// API保存
-document.getElementById('saveApi').onclick=()=>{
+// ====== API保存 ======
+document.getElementById('saveApi').onclick = ()=>{
   const val=document.getElementById('apiUrlInput').value.trim();
   if(val){
-    localStorage.setItem('mubichoco_api',val);
+    localStorage.setItem('mubichoco_api', val);
     API=val;
     document.getElementById('saveMsg').innerText="✅ 保存しました";
-    loadWant(); loadWatched();
+    loadWant(); 
+    loadWatched();
   }
 };
 
-// タブ切替
+// ====== タブ切替 ======
 document.querySelectorAll('.tab').forEach(tab=>{
-  tab.addEventListener('click',()=>{
+  tab.addEventListener('click', ()=>{
     document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
     tab.classList.add('active');
     const target=tab.dataset.tab;
@@ -153,6 +161,6 @@ document.querySelectorAll('.tab').forEach(tab=>{
   });
 });
 
-// 初期ロード
+// ====== 初期読み込み ======
 document.getElementById('apiUrlInput').value=API;
 if(API){ loadWant(); loadWatched(); }
