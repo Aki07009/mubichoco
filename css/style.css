@@ -247,3 +247,8 @@ h1 {
   border-radius: 12px;
   background: #e6f4ff;
 }
+
+/* 絵文字だけは色指定をリセットして元の色で表示する */
+.emoji {
+  color: initial !important;
+}
