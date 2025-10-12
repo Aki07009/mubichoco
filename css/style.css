@@ -1,10 +1,8 @@
 /* ====== 全体設定 ====== */
 body {
   font-family: 'Kosugi Maru', sans-serif;
-  margin: 18px;
+  margin: 18px auto;
   max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
   background: #ffffff;
   color: #333;
   box-sizing: border-box;
@@ -21,8 +19,6 @@ h1 {
   align-items: center;
   gap: 8px;
 }
-
-/* 絵文字だけはグラデーション適用しない */
 h1 .emoji {
   -webkit-text-fill-color: initial !important;
   background: none !important;
@@ -36,7 +32,6 @@ h1 .emoji {
   margin-bottom: 12px;
   flex-wrap: wrap;
 }
-
 .tab {
   padding: 10px 16px;
   cursor: pointer;
@@ -47,21 +42,17 @@ h1 .emoji {
   border-radius: 6px 6px 0 0;
   transition: 0.3s;
 }
-
 .tab.active {
   background: #fff;
   font-weight: bold;
   color: #1e90ff;
 }
-
 .tab:hover {
   background: #e6f0ff;
 }
-
 .tabContent {
   display: none;
 }
-
 .tabContent.active {
   display: block;
 }
@@ -69,7 +60,7 @@ h1 .emoji {
 /* ====== グリッドレイアウト ====== */
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 12px;
   justify-items: center;
   align-items: start;
@@ -82,40 +73,30 @@ h1 .emoji {
 /* ====== 映画ブロック ====== */
 .movie {
   position: relative;
-  width: 140px; /* 小さめサイズ */
+  width: 120px; /* カード幅 */
   border-radius: 12px;
   overflow: hidden;
   text-align: center;
   transition: transform 0.3s ease;
 }
-
 .movie:hover {
   transform: scale(1.05);
 }
 
-/* ====== ポスター枠で縦横比固定 ====== */
-.movie .poster-wrapper {
+/* ====== ポスター画像（縦横比固定） ====== */
+.movie img {
   width: 100%;
-  padding-top: 150%; /* 2:3の縦横比 */
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-.movie .poster-wrapper img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  aspect-ratio: 2/3; /* 縦横比固定 */
   object-fit: cover;
+  border-radius: 12px;
+  display: block;
+  background: #f6f6f6;
 }
 
-/* ====== タイトル（hover時のみ表示） ====== */
-.movie h3 {
-  display: none;
+/* ====== タイトル（hover時のみポスターに重ねる） ====== */
+.movie .title-hover {
   position: absolute;
-  bottom: 4px;
+  bottom: 36px;
   left: 0;
   width: 100%;
   padding: 4px 6px;
@@ -125,15 +106,18 @@ h1 .emoji {
   font-weight: 600;
   text-align: center;
   border-radius: 0 0 12px 12px;
-  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.movie:hover .title-hover {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.movie:hover h3 {
-  display: block;
-}
-
-/* ====== 「観た」ボタン ====== */
-.movie .watched {
+/* ====== 「観た」ボタン（常時表示） ====== */
+.movie button.watched {
   margin-top: 6px;
   display: block;
   width: 100%;
@@ -144,9 +128,9 @@ h1 .emoji {
   border-radius: 6px;
   text-align: center;
   box-sizing: border-box;
+  cursor: pointer;
 }
-
-.movie .watched:hover {
+.movie button.watched:hover {
   background: #187bcd;
 }
 
@@ -159,23 +143,6 @@ h1 .emoji {
   z-index: 2;
 }
 
-/* ====== ボタン ====== */
-.movie button {
-  cursor: pointer;
-  background: #1e90ff;
-  border: none;
-  color: #1b1d1f;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: all 0.2s ease;
-  margin-top: 4px;
-}
-
-.movie button:hover {
-  background: #f0da9b;
-}
-
 /* ====== ランダムピックアップ ====== */
 .random-box {
   background: linear-gradient(135deg, #d6f0ff, #e0f5ff);
@@ -184,7 +151,6 @@ h1 .emoji {
   margin: 36px 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-
 .random-box h3 {
   font-size: 1.4em;
   color: #1e90ff;
@@ -193,7 +159,6 @@ h1 .emoji {
   align-items: center;
   gap: 8px;
 }
-
 #btnRandom {
   background: white;
   border: 2px solid #1e90ff;
@@ -204,7 +169,6 @@ h1 .emoji {
   transition: all 0.3s ease;
   margin-top: 8px;
 }
-
 #btnRandom:hover {
   background: linear-gradient(90deg, #4da0ff, #1e90ff);
   color: white;
@@ -218,18 +182,13 @@ h1 .emoji {
   gap: 8px;
   margin-top: 12px;
 }
-
-#addForm label {
-  font-weight: bold;
-}
-
+#addForm label { font-weight: bold; }
 #addForm input {
   padding: 6px;
   border: 1px solid #ccc;
   border-radius: 4px;
   background: #e6f2ff;
 }
-
 #addForm button {
   margin-top: 12px;
   padding: 8px;
@@ -239,10 +198,7 @@ h1 .emoji {
   border-radius: 6px;
   cursor: pointer;
 }
-
-#addForm button:hover {
-  background: #187bcd;
-}
+#addForm button:hover { background: #187bcd; }
 
 /* ====== ジャンルブロック ====== */
 .genre-block {
@@ -253,6 +209,4 @@ h1 .emoji {
 }
 
 /* ====== 絵文字色リセット ====== */
-.emoji {
-  color: initial !important;
-}
+.emoji { color: initial !important; }
