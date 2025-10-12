@@ -118,12 +118,12 @@ h1 .emoji {
 
 * ====== 「観た」ボタン（常時表示） ====== */
 .movie .watched {
-  margin-top: 12px;  /* 6px → 12px に変更して下げる */
+  margin-top: 16px;  /* 6px → 12px に変更して下げる */
   display: block;
   width: 100%;
   padding: 6px 0;
   font-size: 0.75em;
-  background: #1e90ff;
+  background: #187bcd;
   color: #fff;
   border-radius: 6px;
   text-align: center;
@@ -133,7 +133,7 @@ h1 .emoji {
 }
 
 .movie .watched:hover {
-  background: #187bcd;
+  background: #1e90ff;
 }
 
 /* ====== 有料マーク 💰 ====== */
