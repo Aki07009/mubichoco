@@ -1,16 +1,16 @@
-/* 全体設定 */
+/* ====== 全体設定 ====== */
 body {
   font-family: 'Kosugi Maru', sans-serif;
   margin: 18px;
-  background: #ffffff;
-  color: #333;
   max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
+  background: #ffffff;
+  color: #333;
   box-sizing: border-box;
 }
 
-/* タイトル */
+/* ====== タイトル ====== */
 h1 {
   background: linear-gradient(90deg, #4da0ff, #1e90ff);
   -webkit-background-clip: text;
@@ -22,14 +22,14 @@ h1 {
   gap: 8px;
 }
 
-/* 🎬🍫 絵文字はグラデーション適用しない */
+/* 絵文字だけはグラデーション適用しない */
 h1 .emoji {
   -webkit-text-fill-color: initial !important;
   background: none !important;
   -webkit-background-clip: border-box !important;
 }
 
-/* タブ */
+/* ====== タブ ====== */
 .tabs {
   display: flex;
   border-bottom: 2px solid #ccc;
@@ -69,8 +69,8 @@ h1 .emoji {
 /* ====== グリッドレイアウト ====== */
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
   justify-items: center;
   align-items: start;
   width: 100%;
@@ -83,6 +83,7 @@ h1 .emoji {
 .movie {
   position: relative;
   width: 100%;
+  max-width: 180px; /* ポスターを少し小さめに */
   border-radius: 12px;
   overflow: hidden;
   transition: transform 0.3s ease;
@@ -96,7 +97,7 @@ h1 .emoji {
 /* ====== ポスター画像 ====== */
 .movie img {
   width: 100%;
-  height: 240px;
+  height: 220px; /* 少し小さめ */
   object-fit: cover;
   display: block;
   border-radius: 12px;
@@ -106,7 +107,7 @@ h1 .emoji {
 /* ====== タイトル（hoverで表示・画像に重ねる） ====== */
 .movie h3 {
   position: absolute;
-  bottom: 38px; /* ボタンの上にくる高さ */
+  bottom: 36px; /* ボタンの上にくる高さ */
   left: 0;
   width: 100%;
   padding: 4px 6px;
@@ -120,12 +121,33 @@ h1 .emoji {
   opacity: 0;
   transform: translateY(8px);
   transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none; /* hover判定を邪魔しない */
 }
 
-/* hover時にタイトルを表示 */
 .movie:hover h3 {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ====== 「観た」ボタンまたは表示 ====== */
+.movie .watched {
+  position: absolute;
+  bottom: 4px; /* ポスター下部 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 12px);
+  padding: 4px 6px;
+  font-size: 0.75em;
+  background: #1e90ff;
+  color: #fff;
+  border-radius: 6px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* hover時も「観た」は常に表示 */
+.movie .watched:hover {
+  background: #187bcd;
 }
 
 /* ====== 有料マーク 💰 ====== */
@@ -137,7 +159,7 @@ h1 .emoji {
   z-index: 2;
 }
 
-/* ====== ボタン（常時表示） ====== */
+/* ====== ボタン ====== */
 .movie button {
   cursor: pointer;
   background: #1e90ff;
@@ -230,7 +252,7 @@ h1 .emoji {
   background: #e6f4ff;
 }
 
-/* 絵文字だけは色指定をリセットして元の色で表示する */
+/* ====== 絵文字色リセット ====== */
 .emoji {
   color: initial !important;
 }
