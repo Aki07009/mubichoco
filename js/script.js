@@ -12,11 +12,13 @@ async function loadWant(){
   if(!data){ document.getElementById('wantList').innerText="読み込み失敗"; return; }
   allMovies = data;
 
+  // ジャンル選択更新
   const genreSelect = document.getElementById('filterGenre');
   const genres = Array.from(new Set(data.map(m=>m.genre||"未分類")));
   genreSelect.innerHTML = '<option value="">全部</option>';
   genres.forEach(g=>{ genreSelect.innerHTML += `<option value="${g}">${g}</option>`; });
 
+  // ジャンルごとにグループ化
   const grouped = {};
   data.forEach(m => {
     const g = m.genre || "未分類";
@@ -40,8 +42,8 @@ async function loadWant(){
     cardsContainer.className='cards-container';
 
     grouped[g].forEach(m=>{
-      const d=document.createElement('div');
-      d.className='movie';
+      const d = document.createElement('div');
+      d.className = 'movie';
 
       const paidLabel = m.status==='有料' ? '<div class="paid-label">💰</div>' : '';
 
@@ -49,15 +51,16 @@ async function loadWant(){
         ${paidLabel}
         ${m.poster ? `<img src="${m.poster}" alt="${m.title}"><div class="no-image" style="display:none">No image</div>` 
                     : `<div class="no-image">No image</div>`}
-        <div class="title-hover">${m.title}</div>
-        <button>観た！</button>
+        <h3>${m.title}</h3>
+        <div class="watched">観た</div>
       `;
 
       const img = d.querySelector('img');
       const noImg = d.querySelector('.no-image');
       if(img) img.onerror = ()=>{ img.style.display='none'; noImg.style.display='flex'; };
 
-      d.querySelector('button').onclick=async()=>{
+      // 「観た」ボタンクリック
+      d.querySelector('.watched').onclick = async ()=>{
         await getJSON(API+`?action=watched&title=${encodeURIComponent(m.title)}`);
         loadWant(); loadWatched();
       };
@@ -79,7 +82,7 @@ async function loadWatched(){
   const container = document.getElementById('watchedList');
   container.innerHTML = '';
 
-  data.forEach(m => {
+  data.forEach(m=>{
     const d = document.createElement('div');
     d.className = 'movie';
 
@@ -89,8 +92,8 @@ async function loadWatched(){
       ${paidLabel}
       ${m.poster ? `<img src="${m.poster}" alt="${m.title}"><div class="no-image" style="display:none">No image</div>` 
                   : `<div class="no-image">No image</div>`}
-      <div class="title-hover">${m.title}</div>
-      <div class="status-label">観た日: ${m.watchedDate ? new Date(m.watchedDate).toLocaleDateString() : ''}</div>
+      <h3>${m.title}</h3>
+      <div class="watched">観た</div>
     `;
 
     const img = d.querySelector('img');
@@ -101,7 +104,7 @@ async function loadWatched(){
   });
 }
 
-// ランダム
+// ランダムピックアップ
 document.getElementById('btnRandom').onclick = () => {
   if(!allMovies.length){ document.getElementById('randomResult').innerText="リストが空です"; return; }
   const statusFilter = document.getElementById('filterStatus').value;
@@ -114,7 +117,7 @@ document.getElementById('btnRandom').onclick = () => {
   document.getElementById('randomResult').innerHTML = `👉 <a href="${choice.url||'#'}" target="_blank">${choice.title}</a> [${choice.status||''}]`;
 };
 
-// 追加
+// 追加フォーム
 document.getElementById('addForm').onsubmit=async(e)=>{
   e.preventDefault();
   if(!API){ setStatus("API未設定"); return; }
@@ -150,5 +153,6 @@ document.querySelectorAll('.tab').forEach(tab=>{
   });
 });
 
+// 初期ロード
 document.getElementById('apiUrlInput').value=API;
 if(API){ loadWant(); loadWatched(); }
