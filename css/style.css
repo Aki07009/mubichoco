@@ -82,8 +82,7 @@ h1 .emoji {
 /* ====== 映画ブロック ====== */
 .movie {
   position: relative;
-  width: 100%;
-  max-width: 180px; /* ポスターを少し小さめに */
+  width: 160px; /* ポスターの幅 */
   border-radius: 12px;
   overflow: hidden;
   transition: transform 0.3s ease;
@@ -94,20 +93,21 @@ h1 .emoji {
   transform: scale(1.04);
 }
 
-/* ====== ポスター画像 ====== */
+/* ====== ポスター画像（縦横比維持） ====== */
 .movie img {
   width: 100%;
-  height: 220px; /* 少し小さめ */
-  object-fit: cover;
+  height: auto;
   display: block;
   border-radius: 12px;
   background: #f6f6f6;
+  aspect-ratio: 2/3; /* 縦横比：縦長 */
+  object-fit: cover;
 }
 
-/* ====== タイトル（hoverで表示・画像に重ねる） ====== */
+/* ====== タイトル（hover時のみ表示） ====== */
 .movie h3 {
   position: absolute;
-  bottom: 36px; /* ボタンの上にくる高さ */
+  bottom: 36px;
   left: 0;
   width: 100%;
   padding: 4px 6px;
@@ -121,7 +121,7 @@ h1 .emoji {
   opacity: 0;
   transform: translateY(8px);
   transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: none; /* hover判定を邪魔しない */
+  pointer-events: none;
 }
 
 .movie:hover h3 {
@@ -129,10 +129,10 @@ h1 .emoji {
   transform: translateY(0);
 }
 
-/* ====== 「観た」ボタンまたは表示 ====== */
+/* ====== 「観た」ボタン ====== */
 .movie .watched {
   position: absolute;
-  bottom: 4px; /* ポスター下部 */
+  bottom: 4px;
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 12px);
@@ -145,7 +145,6 @@ h1 .emoji {
   text-align: center;
 }
 
-/* hover時も「観た」は常に表示 */
 .movie .watched:hover {
   background: #187bcd;
 }
@@ -173,7 +172,7 @@ h1 .emoji {
 }
 
 .movie button:hover {
-  background: #f0da9b; /* hover時に明るく */
+  background: #f0da9b;
 }
 
 /* ====== ランダムピックアップ ====== */
