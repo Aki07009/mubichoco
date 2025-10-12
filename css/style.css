@@ -93,20 +93,29 @@ h1 .emoji {
   transform: scale(1.05);
 }
 
-/* ====== ポスター画像（縦横比維持） ====== */
-.movie img {
+/* ====== ポスター枠で縦横比固定 ====== */
+.movie .poster-wrapper {
   width: 100%;
-  height: auto; /* 縦横比維持 */
-  display: block;
+  padding-top: 150%; /* 2:3の縦横比 */
+  position: relative;
+  overflow: hidden;
   border-radius: 12px;
-  background: #f6f6f6;
+}
+
+.movie .poster-wrapper img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
-/* ====== タイトル（hover時のみポスターに重ねる） ====== */
+/* ====== タイトル（hover時のみ表示） ====== */
 .movie h3 {
+  display: none;
   position: absolute;
-  bottom: 36px; /* ポスター下端から少し上 */
+  bottom: 4px;
   left: 0;
   width: 100%;
   padding: 4px 6px;
@@ -116,18 +125,14 @@ h1 .emoji {
   font-weight: 600;
   text-align: center;
   border-radius: 0 0 12px 12px;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: none;
+  box-sizing: border-box;
 }
 
 .movie:hover h3 {
-  opacity: 1;
-  transform: translateY(0);
+  display: block;
 }
 
-/* ====== 「観た」ボタン（常時表示） ====== */
+/* ====== 「観た」ボタン ====== */
 .movie .watched {
   margin-top: 6px;
   display: block;
