@@ -22,6 +22,13 @@ h1 {
   gap: 8px;
 }
 
+/* 🎬🍫 絵文字はグラデーション適用しない */
+h1 .emoji {
+  -webkit-text-fill-color: initial !important;
+  background: none !important;
+  -webkit-background-clip: border-box !important;
+}
+
 /* タブ */
 .tabs {
   display: flex;
