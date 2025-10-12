@@ -79,42 +79,45 @@ h1 .emoji {
   box-sizing: border-box;
 }
 
-/* ====== 映画カード（カード背景削除） ====== */
+/* ====== 映画ブロック ====== */
 .movie {
   position: relative;
   width: 100%;
   border-radius: 12px;
   overflow: hidden;
   transition: transform 0.3s ease;
+  text-align: center;
 }
 
 .movie:hover {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 /* ====== ポスター画像 ====== */
 .movie img {
   width: 100%;
-  height: 250px;
+  height: 240px;
   object-fit: cover;
   display: block;
   border-radius: 12px;
   background: #f6f6f6;
+  margin-bottom: 8px; /* ボタンとの間 */
 }
 
-/* ====== タイトルをポスターに重ねる ====== */
+/* ====== タイトル（画像に重ねる） ====== */
 .movie h3 {
   position: absolute;
-  bottom: 38px; /* ボタンと被らないように */
+  bottom: 12px;
   left: 0;
   width: 100%;
-  padding: 6px;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+  padding: 6px 8px;
+  background: rgba(0, 0, 0, 0.55);
   color: white;
-  font-size: 0.95em;
-  text-align: center;
-  box-sizing: border-box;
+  font-size: 0.9em;
   font-weight: 600;
+  text-align: center;
+  border-radius: 0 0 12px 12px;
+  box-sizing: border-box;
 }
 
 /* ====== 有料マーク 💰 ====== */
@@ -126,25 +129,21 @@ h1 .emoji {
   z-index: 2;
 }
 
-/* ====== ボタン ====== */
+/* ====== ボタン（画像の外側に戻す） ====== */
 .movie button {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  border: none;
-  background: rgba(255, 255, 255, 0.9);
-  color: #333;
-  padding: 6px 0;
-  font-size: 0.9em;
-  font-weight: 500;
   cursor: pointer;
-  border-radius: 0 0 12px 12px;
-  transition: background 0.3s;
+  background: #1e90ff;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  margin-top: 4px;
 }
 
 .movie button:hover {
-  background: #eee;
+  background: #187bcd;
 }
 
 /* ====== ランダムピックアップ ====== */
