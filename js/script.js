@@ -1,10 +1,11 @@
 let API = localStorage.getItem('mubichoco_api') || '';
 let allMovies = [];
 
-// ステータス表示
+// ====== ステータス表示 ======
 function setStatus(msg){ 
   document.getElementById('addMsg').innerText = msg; 
 }
+
 async function getJSON(url){ 
   try { 
     return await (await fetch(url)).json(); 
@@ -21,11 +22,13 @@ async function loadWant(){
   if(!data){ document.getElementById('wantList').innerText="読み込み失敗"; return; }
   allMovies = data;
 
+  // ジャンルフィルター設定
   const genreSelect = document.getElementById('filterGenre');
   const genres = Array.from(new Set(data.map(m=>m.genre||"未分類")));
   genreSelect.innerHTML = '<option value="">全部</option>';
   genres.forEach(g=>{ genreSelect.innerHTML += `<option value="${g}">${g}</option>`; });
 
+  // ジャンルごとにグループ化
   const grouped = {};
   data.forEach(m => {
     const g = m.genre || "未分類";
@@ -59,7 +62,7 @@ async function loadWant(){
         ${m.poster ? `<img src="${m.poster}" alt="${m.title}"><div class="no-image" style="display:none">No image</div>` 
                     : `<div class="no-image">No image</div>`}
         <div class="title-hover">${m.title}</div>
-        <button class="watched">観た！</button>
+        <button class="watched" style="margin-top:8px;">観た！</button>
       `;
 
       const img = d.querySelector('img');
@@ -100,7 +103,7 @@ async function loadWatched(){
       ${m.poster ? `<img src="${m.poster}" alt="${m.title}"><div class="no-image" style="display:none">No image</div>` 
                   : `<div class="no-image">No image</div>`}
       <div class="title-hover">${m.title}</div>
-      <div class="status-label">観た日: ${m.watchedDate ? new Date(m.watchedDate).toLocaleDateString() : ''}</div>
+      <div class="status-label" style="margin-top:4px;">観た日: ${m.watchedDate ? new Date(m.watchedDate).toLocaleDateString() : ''}</div>
     `;
 
     const img = d.querySelector('img');
