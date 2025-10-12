@@ -116,22 +116,24 @@ h1 .emoji {
   transform: translateY(0);
 }
 
-/* ====== 「観た」ボタン（常時表示） ====== */
-.movie button.watched {
+* ====== 「観た」ボタン（常時表示） ====== */
+.movie .watched {
   margin-top: 6px;
   display: block;
   width: 100%;
-  padding: 4px 0;
+  padding: 6px 0;           /* ボタン内の余白を調整 */
   font-size: 0.75em;
   background: #1e90ff;
   color: #fff;
-  border-radius: 6px;
+  border-radius: 6px;        /* 角丸をしっかり適用 */
   text-align: center;
   box-sizing: border-box;
-  cursor: pointer;
+  border: none;              /* 枠線を消してスッキリ */
+  transition: all 0.2s ease;
 }
-.movie button.watched:hover {
-  background: #187bcd;
+
+.movie .watched:hover {
+  background: #187bcd;       /* hoverで色が変わるだけ */
 }
 
 /* ====== 有料マーク 💰 ====== */
