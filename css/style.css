@@ -116,25 +116,33 @@ h1 .emoji {
   transform: translateY(0);
 }
 
-* ====== 「観た」ボタン（常時表示） ====== */
-.movie .watched {
-  margin-top: 16px;  /* 6px → 12px に変更して下げる */
-  display: block;
-  width: 100%;
-  padding: 6px 0;
-  font-size: 0.75em;
-  background: #187bcd;
-  color: #fff;
-  border-radius: 6px;
-  text-align: center;
-  box-sizing: border-box;
+/* 観たボタン（水色系） */
+button.watched {
+  background-color: #87cefa;   /* 空色 */
   border: none;
-  transition: all 0.2s ease;
+  border-radius: 12px;         /* 丸みを付ける */
+  padding: 6px 14px;           /* 余裕のあるサイズ */
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  margin-top: 8px;             /* ポスターとの間隔 */
+  color: #1b1d1f;              /* 文字は濃いめ */
+  font-weight: bold;
 }
 
-.movie .watched:hover {
-  background: #1e90ff;
+button.watched:hover {
+  transform: translateY(-2px);   
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  background-color: #00bfff;    /* ホバー時の濃い水色 */
 }
+
+button.watched:active {
+  transform: translateY(0);      
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  background-color: #1e90ff;    /* 押した時の濃い水色 */
+}
+
 
 /* ====== 有料マーク 💰 ====== */
 .paid-label {
