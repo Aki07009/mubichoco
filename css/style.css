@@ -62,8 +62,8 @@ h1 {
 /* ====== グリッドレイアウト（ここから重要） ====== */
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* 自動整列 */
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* 自動整列 */
+  gap: 12px;
   justify-items: center;
   align-items: start;
   width: 100%;
@@ -81,9 +81,9 @@ h1 {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  padding: 12px;
-  width: 180px;
-  height: 320px; /* 全カード高さをそろえる */
+  padding: 8px;
+  width: 100％;
+  height: 160px; /* 全カード高さをそろえる */
   transition: transform 0.2s ease;
 }
 
@@ -94,7 +94,7 @@ h1 {
 /* ====== 画像 ====== */
 .movie img {
   width: 100%;
-  height: 250px; /* 固定で安定感 */
+  height: auto; /* 固定で安定感 */
   border-radius: 8px;
   margin-bottom: 8px;
   object-fit: contain; /* 途切れない */
