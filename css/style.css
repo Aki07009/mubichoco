@@ -66,10 +66,10 @@ h1 .emoji {
   display: block;
 }
 
-/* ====== グリッドレイアウト（ここから重要） ====== */
+/* ====== グリッドレイアウト ====== */
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* 自動整列 */
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 18px;
   justify-items: center;
   align-items: start;
@@ -79,49 +79,42 @@ h1 .emoji {
   box-sizing: border-box;
 }
 
-/* ====== 映画カード ====== */
+/* ====== 映画カード（カード背景削除） ====== */
 .movie {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  padding: 8px;
   width: 100%;
-  height: 250px;
-  transition: transform 0.2s ease;
+  border-radius: 12px;
   overflow: hidden;
+  transition: transform 0.3s ease;
 }
 
 .movie:hover {
-  transform: scale(1.03);
+  transform: scale(1.05);
 }
 
-/* ====== 画像 ====== */
+/* ====== ポスター画像 ====== */
 .movie img {
   width: 100%;
-  height: 180px; /* 固定で安定感 */
-  border-radius: 8px;
-  margin-bottom: 6px;
-  object-fit: contain; /* 途切れない */
+  height: 250px;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
   background: #f6f6f6;
 }
 
-/* ====== 画像なし時 ====== */
-.movie .no-image {
+/* ====== タイトルをポスターに重ねる ====== */
+.movie h3 {
+  position: absolute;
+  bottom: 38px; /* ボタンと被らないように */
+  left: 0;
   width: 100%;
-  height: 250px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #eee;
-  color: #888;
-  font-size: 0.9em;
-  border-radius: 8px;
-  margin-bottom: 8px;
+  padding: 6px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+  color: white;
+  font-size: 0.95em;
   text-align: center;
+  box-sizing: border-box;
+  font-weight: 600;
 }
 
 /* ====== 有料マーク 💰 ====== */
@@ -133,50 +126,25 @@ h1 .emoji {
   z-index: 2;
 }
 
-/* ====== タイトルhover ====== */
-.title-hover {
-  position: absolute;
-  bottom: 42px; /* ボタンと重ならない位置 */
-  left: 0;
-  width: 100%;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  padding: 3px 6px;
-  border-radius: 4px 4px 0 0;
-  opacity: 0;
-  transition: opacity 0.3s;
-  z-index: 2;
-}
-
-.movie:hover .title-hover {
-  opacity: 1;
-}
-
 /* ====== ボタン ====== */
 .movie button {
-  cursor: pointer;
-  background: #1e90ff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   border: none;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: all 0.2s ease;
-  z-index: 1;
-  margin-top: auto; /* 下に固定 */
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 6px 0;
+  font-size: 0.9em;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 0 0 12px 12px;
+  transition: background 0.3s;
 }
 
 .movie button:hover {
-  background: #187bcd;
-}
-
-/* ====== ステータス ====== */
-.movie .status-label {
-  font-size: 0.85em;
-  color: #555;
-  margin-bottom: 6px;
-  text-align: center;
+  background: #eee;
 }
 
 /* ====== ランダムピックアップ ====== */
