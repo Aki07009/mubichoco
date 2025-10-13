@@ -69,15 +69,14 @@ async function loadWant(){
       const noImg = d.querySelector('.no-image');
       if(img) img.onerror = ()=>{ img.style.display='none'; noImg.style.display='flex'; };
 
-　　　d.querySelector('button.watched').onclick = async ()=> {
-  　　const confirmMove = confirm(`『${m.title}』を観たリストに移しますか？`);
-  　　if (!confirmMove) return; // キャンセルなら何もしない
+      d.querySelector('button.watched').onclick = async ()=> {
+      const confirmMove = confirm(`『${m.title}』を観たリストに移しますか？`);
+      if (!confirmMove) return; // キャンセルなら何もしない
 
-  　　await getJSON(API+`?action=watched&title=${encodeURIComponent(m.title)}`);
-  　　loadWant(); 
-  　　loadWatched();
-　　};
-
+      await getJSON(API+`?action=watched&title=${encodeURIComponent(m.title)}`);
+      loadWant(); 
+      loadWatched();
+    };
 
       cardsContainer.appendChild(d);
     });
