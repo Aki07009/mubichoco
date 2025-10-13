@@ -15,47 +15,6 @@ async function getJSON(url){
   } 
 }
 
-// ====== カスタム確認ダイアログ ======
-function showConfirmDialog(message) {
-  return new Promise((resolve) => {
-    const overlay = document.createElement('div');
-    overlay.className = 'dialog-overlay';
-    overlay.innerHTML = `
-      <div class="dialog-box">
-        <p>${message}</p>
-        <div class="dialog-buttons">
-          <button class="yes">はい</button>
-          <button class="no">いいえ</button>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(overlay);
-
-    overlay.querySelector('.yes').onclick = () => {
-      overlay.remove();
-      resolve(true);
-    };
-    overlay.querySelector('.no').onclick = () => {
-      overlay.remove();
-      resolve(false);
-    };
-
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
-        overlay.remove();
-        resolve(false);
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        overlay.remove();
-        resolve(false);
-      }
-    }, { once: true });
-  });
-}
-
 // ====== 観たいリスト読み込み ======
 async function loadWant(){
   if(!API){ document.getElementById('wantList').innerText="API未設定"; return; }
@@ -100,19 +59,29 @@ async function loadWant(){
 
       d.innerHTML = `
         ${paidLabel}
-        ${m.poster ? `<img src="${m.poster}" alt="${m.title}"><div class="no-image" style="display:none">No image</div>` 
-                    : `<div class="no-image">No image</div>`}
+        ${m.poster 
+          ? `<img src="${m.poster}" alt="${m.title}"><div class="no-image" style="display:none">No image</div>` 
+          : `<div class="no-image">No image</div>`}
         <div class="title-hover">${m.title}</div>
-        <button class="watched">観た！</button>
+        <button class="watched" style="margin-top:8px;">観た！</button>
       `;
 
       const img = d.querySelector('img');
       const noImg = d.querySelector('.no-image');
-      if(img) img.onerror = ()=>{ img.style.display='none'; noImg.style.display='flex'; };
+      if(img) {
+        img.onerror = ()=>{ img.style.display='none'; noImg.style.display='flex'; };
+        // ポスタークリックでURLへ
+        if(m.url){ 
+          img.style.cursor = 'pointer';
+          img.onclick = ()=>{ window.open(m.url, '_blank'); };
+        }
+      }
 
+      // 観たボタン
       d.querySelector('button.watched').onclick = async ()=> {
-        const confirmMove = await showConfirmDialog(`『${m.title}』を観たリストに移しますか？`);
+        const confirmMove = confirm(`『${m.title}』を観たリストに移しますか？`);
         if (!confirmMove) return;
+
         await getJSON(API+`?action=watched&title=${encodeURIComponent(m.title)}`);
         loadWant(); 
         loadWatched();
